@@ -27,6 +27,7 @@
 		vm.title = "Hello, ng2048!";
 		vm.version = "1.0.0";
 		vm.listFeatures = homeService.getFeaturesList();
+		vm.default = true;
 
 	}
 

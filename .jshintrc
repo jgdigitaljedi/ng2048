@@ -1,9 +1,9 @@
 {
-	"node": true,
 	"esnext": true,
 	"bitwise": true,
 	"camelcase": false,
-	"curly": true,
+	"curly": false,
+	"devel": true,
 	"eqeqeq": true,
 	"immed": true,
 	"latedef": false,
@@ -12,10 +12,10 @@
 	"quotmark": false,
 	"undef": false,
 	"unused": false,
-	"strict": true,
+	"strict": false,
 	"trailing": false,
-	"smarttabs": true,
 	"white": false,
+	"-W099": true,
 	"globals": {
 		"browser": false,
 		"describe": false,
@@ -30,8 +30,8 @@
 		"alert": false,
 		"jasmine": false,
 		"jquery": false,
-		"mocha": true
-
+		"mocha": true,
+		"node": true
 	}
 
 }

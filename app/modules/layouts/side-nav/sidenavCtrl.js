@@ -15,7 +15,7 @@
 
 	// Injecting Denpendencies
 
-	SidenavCtrl.$inject = ['$mdSidenav', '$state', '$mdBottomSheet', '$mdToast', 'MenuService', '$scope'];
+	SidenavCtrl.$inject = ['$mdSidenav', '$state', '$mdBottomSheet', '$mdToast', 'MenuService', '$scope', '$rootScope'];
 	SettingsCtrl.$inject = ['$mdBottomSheet'];
 
 	/*
@@ -24,7 +24,7 @@
 	* and bindable members up top.
 	*/
 
-	function SidenavCtrl($mdSidenav, $state, $mdBottomSheet, $mdToast, MenuService, $scope) {
+	function SidenavCtrl($mdSidenav, $state, $mdBottomSheet, $mdToast, MenuService, $scope, $rootScope) {
 		/*jshint validthis: true */
 		var vm = this;
 
@@ -34,6 +34,10 @@
 
 		vm.closeSidenav = function() {
 			$mdSidenav('left').close();
+		};
+
+		vm.changeTheme = function () {
+			$scope.$parent.vm.default = !$scope.$parent.vm.default;
 		};
 
 		// Close menu on small screen after click on menu item.

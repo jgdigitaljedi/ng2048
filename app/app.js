@@ -13,7 +13,7 @@
 	angular.module('ng2048', [
 		'ngResource',
 		'ngAria',
-		 'ngMaterial',
+		'ngMaterial',
 		'ngMdIcons',
 		'ngMessages',
 		'ngCookies',

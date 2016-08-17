@@ -10,7 +10,13 @@
             </div>
         </md-toolbar>
         <md-list>
-            <md-list-item ui-sref="home.dashboard">
+            <md-list-item ng-click="vm.changeTheme()">
+                <div class="inset">
+                    <ng-md-icon icon="apps"></ng-md-icon>
+                </div>
+                <p> Change Theme </p>
+            </md-list-item>
+            <!-- <md-list-item ui-sref="home.dashboard">
                 <div class="inset">
                     <ng-md-icon icon="apps"></ng-md-icon>
                 </div>
@@ -29,7 +35,7 @@
                     <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
                 </div>
                 <p> {{ item.title }}</p>
-            </md-list-item>
+            </md-list-item> -->
         </md-list>
     </div>
 </md-sidenav>
@@ -42,7 +48,7 @@
             </md-button>
             <h3>ng2048</h3>
             <span flex></span>
-            <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+            <!-- <md-button aria-label="Search" ng-click="showSearch = !showSearch">
                 <ng-md-icon icon="search"></ng-md-icon>
             </md-button>
             <md-menu>
@@ -70,10 +76,10 @@
                         </md-button>
                     </md-menu-item>
                 </md-menu-content>
-            </md-menu>
+            </md-menu> -->
         </div>
     </md-toolbar>
-    <md-toolbar class="md-hue-1" ng-show="showSearch">
+    <!-- <md-toolbar class="md-hue-1" ng-show="showSearch">
         <div class="md-toolbar-tools">
             <md-button ng-click="showSearch = !showSearch" aria-label="Back">
                 <ng-md-icon icon="arrow_back"></ng-md-icon>
@@ -86,7 +92,7 @@
                 <input ng-model="search.who" placeholder="Search ...">
             </md-input-container>
         </div>
-    </md-toolbar>
+    </md-toolbar> -->
     <md-content layout="column" flex md-scroll-y style="background-color:#DCDCDC">
         <div ui-view></div>
     </md-content>
