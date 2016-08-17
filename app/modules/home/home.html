@@ -24,7 +24,7 @@
                 </div>
                 <p> New Game </p>
             </md-list-item>
-            <md-list-item ng-click="vm.newGame()">
+            <md-list-item>
                 <div class="inset">
                     <ng-md-icon icon="grade"></ng-md-icon>
                 </div>
@@ -41,7 +41,7 @@
 </md-sidenav>
 
 <div layout="column" class="relative" layout-fill role="main" ng-controller="LayoutCtrl as layout" ng-cloak>
-    <md-toolbar ng-show="!showSearch">
+    <md-toolbar>
         <div class="md-toolbar-tools">
             <md-button ng-click="layout.toggleSidenav('left')" hide-gt-md aria-label="Menu">
                 <ng-md-icon icon="menu"></ng-md-icon>
