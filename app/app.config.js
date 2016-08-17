@@ -48,11 +48,6 @@
 	function runBlock($rootScope) {
 		'use strict';
 
-		$rootScope.theme = 'lime';
-		$rootScope.changeTheme = function() {
-			$rootScope.theme = $rootScope.theme === 'indigo' ? 'lime' : 'indigo'; 
-		};
-
 		console.log('AngularJS run() function...');
 	}
 

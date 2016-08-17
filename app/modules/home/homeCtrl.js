@@ -24,8 +24,8 @@
 	function Home(homeService) {
 		/*jshint validthis: true */
 		var vm = this;
-		vm.title = "Hello, ng2048!";
-		vm.version = "1.0.0";
+		vm.title = "ng2048!";
+		vm.version = "v0.1.0";
 		vm.listFeatures = homeService.getFeaturesList();
 		vm.default = true;
 

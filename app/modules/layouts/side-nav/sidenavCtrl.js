@@ -27,6 +27,13 @@
 	function SidenavCtrl($mdSidenav, $state, $mdBottomSheet, $mdToast, MenuService, $scope, $rootScope) {
 		/*jshint validthis: true */
 		var vm = this;
+		vm.highScore = 0;
+		vm.enterName = false;
+		vm.playerName = 'Player 1';
+
+		vm.newGame = function () {
+			// something to reset game
+		};
 
 		vm.toggleSidenav = function (menuId) {
 			$mdSidenav(menuId).toggle();
