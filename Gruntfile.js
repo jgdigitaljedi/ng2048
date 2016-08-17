@@ -61,23 +61,23 @@ module.exports = function (grunt) {
 			}
 		},
 
-		uglify: {
-			options: {
-				banner: '<%= banner %>',
-				report: 'min'
-			},
-			base: {
-				src: ['<%= concat.base.dest %>'],
-				dest: 'app/assets/js/<%= pkg.name %>-angscript.min.js'
-			},
-			basePlugin: {
-				src: [ 'src/plugins/**/*.js' ],
-				dest: 'app/assets/js/plugins/',
-				expand: true,
-				flatten: true,
-				ext: '.min.js'
-			}
-		},
+		// uglify: {
+		// 	options: {
+		// 		banner: '<%= banner %>',
+		// 		report: 'min'
+		// 	},
+		// 	base: {
+		// 		src: ['<%= concat.base.dest %>'],
+		// 		dest: 'app/assets/js/<%= pkg.name %>-angscript.min.js'
+		// 	},
+		// 	basePlugin: {
+		// 		src: [ 'src/plugins/**/*.js' ],
+		// 		dest: 'app/assets/js/plugins/',
+		// 		expand: true,
+		// 		flatten: true,
+		// 		ext: '.min.js'
+		// 	}
+		// },
 
 		connect: {
 			server: {
@@ -106,7 +106,51 @@ module.exports = function (grunt) {
 				options: {
 					livereload: true
 				}
-			}
+			},
+			styles: {
+		        files: ['app/assets/less/*.less'],
+		        tasks: ['less'],
+		        options: {
+		        	spawn: false,
+		        	livereload: true
+		        }
+		    },
+		    html: {
+		    	files: ['app/modules/**/*.html'],
+		    	options: {
+		    		spawn: false,
+		    		livereload: true
+		    	}
+		    },
+		    utility: {
+		    	files: ['Gruntfile.js', 'index.html'],
+		    	options: {
+		    		spawn: false,
+		    		livereload: true
+		    	}
+		    }
+		},
+
+		less: {
+		  	development: {
+		    	options: {
+		     	 	paths: ['app/assets/less/']
+		    	},
+		    	files: {
+		      		'app/assets/css/result.css': 'app/assets/less/main.less'
+		    	}
+		  	},
+		  	production: {
+		    	options: {
+		      		paths: ['app/assets/less/'],
+		      		plugins: [
+		        		new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]})
+		      		]
+		    	},
+		    	files: {
+		      		'app/assets/css/result.css': 'app/assets/less/main.less'
+		    	}
+		  	}
 		},
 
 		injector: {
@@ -146,8 +190,60 @@ module.exports = function (grunt) {
 					standAlone: false
 				}
 			}
-		}
+		},
 
+		ngAnnotate: {
+			options: {
+				singleQuotes: true
+			},
+			app: {
+				files: {
+					'min-safe/application.js': [
+						'app/app.js',
+						'app/app.config.js',
+						'app/modules/**/*Module.js',
+						'app/modules/**/*Route.js',
+						'app/modules/**/*Ctrl.js',
+						'app/modules/**/*Service.js',
+						'app/modules/**/*Directive.js'
+					]
+				}
+			}
+		},
+
+		uglify: {
+			app: {
+				options: {
+					mangle: true
+				},
+				files: {
+					'app/assets/js/<%= pkg.name %>-appbundle.js': 'min-safe/application.js'
+				}
+			}
+		},
+
+		cssmin: {
+			target: {
+				files: {
+					'app/assets/css/result.css': ['app/assets/css/result.css'],
+					'app/assets/css/angular-material/angular-material.css': ['app/assets/css/angular-material/angular-material.css'],
+					'app/assets/css/angular-material-icons/angular-material-icons.css': ['app/assets/css/angular-material-icons/angular-material-icons.css']
+				}
+			}
+		},
+
+		copy: {
+			main: {
+				files: [
+					{
+						expand: true,
+						src: 'node_modules/font-awesome/fonts/*',
+						dest: 'app/assets/fonts/',
+						flatten: true
+					}
+				]
+			}
+		}
 
 
 	});
@@ -161,15 +257,19 @@ module.exports = function (grunt) {
 	// Register grunt tasks
 	grunt.registerTask("build", [
 		"jshint",
+		"copy",
+		"less",
 		"exec",
 		"concat",
+		"uglify",
 		"ngtemplates",
+		"cssmin",
 		"injector:production",
 		"concurrent",
 		"clean"
 	]);
 
 	// Development task(s).
-	grunt.registerTask('dev', ['injector:dev', 'concurrent']);
+	grunt.registerTask('dev', ['jshint', 'injector:dev', 'copy', 'less', 'concurrent']);
 
 };
