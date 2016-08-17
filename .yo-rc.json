@@ -1,0 +1,9 @@
+{
+  "generator-angm": {
+    "appName": "ng2048",
+    "angularCookies": true,
+    "angularAnimate": true,
+    "angularSanitize": true,
+    "angularMaterial": true
+  }
+}
