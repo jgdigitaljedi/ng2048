@@ -1,0 +1,15 @@
+grid logic will need to:
+
+	- set starting tile positions
+
+	- track tile positions
+
+	- empty board for new games
+
+	- check available cells
+
+	- move tiles
+
+	- randomly insert new tiles
+
+	- 

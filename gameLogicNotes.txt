@@ -1,0 +1,30 @@
+the Game Manager will need to:
+
+	- start a new game
+
+	- keep track of score and whether or not player has won
+
+	- handle the moves and determine if game is over
+
+	- track and retrieve high score
+
+	- track available moves
+
+details:
+
+	-start new game
+		- set game state (over or not)
+		- empty the grid
+		- start grid with some tiles
+		- set current score
+
+	- keep track of score and determine whether or not player has won
+		- determine if winning score acheived
+		- see if score is better than high score (maybe use local storage or cookieStore here)
+		- update current score
+
+	- handle moves
+		- position tracking for tiles
+		- remove tiles after match and insert new ones (need to see how many)
+		- see what moves are available if any
+		- 
