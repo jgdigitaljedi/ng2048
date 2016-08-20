@@ -2206,3 +2206,20 @@ code {
 ul {
   list-style: none;
 }
+.box {
+  width: 40px;
+  height: 40px;
+  background-color: blue;
+}
+.box.transformed {
+  transform: translateX(300px);
+}
+#game-container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  margin-top: 10px;
+}
