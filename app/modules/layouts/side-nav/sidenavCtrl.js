@@ -30,9 +30,11 @@
 		vm.highScore = 0;
 		vm.enterName = false;
 		vm.playerName = 'Player 1';
+		vm.lightTheme = true;
 
 		vm.newGame = function () {
 			// something to reset game
+			window.gameLogic.newGame();
 		};
 
 		vm.toggleSidenav = function (menuId) {
@@ -45,6 +47,7 @@
 
 		vm.changeTheme = function () {
 			$scope.$parent.vm.default = !$scope.$parent.vm.default;
+			vm.lightTheme = $scope.$parent.vm.default;
 		};
 
 		// Close menu on small screen after click on menu item.

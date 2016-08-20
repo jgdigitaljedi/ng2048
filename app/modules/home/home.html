@@ -4,12 +4,12 @@
             <div layout="column" class="md-toolbar-tools-bottom inset">
                 <div layout="row">
                     <div flex="80" style="margin-top: 10px;">
-                        <div>ng2048</div>
+                        <div>Phangular 2048</div>
                     </div>
                 </div>
             </div>
         </md-toolbar>
-        <md-list>
+        <md-list ng-class="{ 'white-text': !vm.lightTheme }">
             <md-list-item>
                 <div class="inset" ng-click="vm.enterName = !vm.enterName">
                     <ng-md-icon icon="face"></ng-md-icon>
@@ -46,7 +46,7 @@
             <md-button ng-click="layout.toggleSidenav('left')" hide-gt-md aria-label="Menu">
                 <ng-md-icon icon="menu"></ng-md-icon>
             </md-button>
-            <h3>ng2048</h3>
+            <!-- <h3>ng2048</h3> -->
             <span flex></span>
         </div>
     </md-toolbar>

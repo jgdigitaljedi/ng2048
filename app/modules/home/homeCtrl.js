@@ -13,20 +13,13 @@
 		.module('ng2048')
 		.controller('HomeCtrl', Home);
 
-	Home.$inject = ['homeService'];
-
-	/*
-	* recommend
-	* Using function declarations
-	* and bindable members up top.
-	*/
+	Home.$inject = [];
 
 	function Home(homeService) {
 		/*jshint validthis: true */
 		var vm = this;
-		vm.title = "ng2048!";
-		vm.version = "v0.1.0";
-		vm.listFeatures = homeService.getFeaturesList();
+		vm.title = 'Phangular 2048!';
+		vm.version = 'v0.5.0';
 		vm.default = true;
 
 	}
