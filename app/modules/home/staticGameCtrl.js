@@ -1,9 +1,10 @@
 /*jshint funcscope:true*/
 window.gameLogic = {
-	createGame: function () {
-		this.game();
+	createGame: function (scope, $injector) {
+		this.game(scope, $injector);
 	},
-	game: function () {
+	game: function (scope, $injector) {
+		console.log('scope', scope);
 		var tileSize = 100,
 			fieldArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
 			tileSprites,
@@ -72,7 +73,7 @@ window.gameLogic = {
 			tile.addChild(text);
 			tileSprites.add(tile);
 			var fadeIn = game.add.tween(tile);
-			fadeIn.to({alpha: 1}, 300);
+			fadeIn.to({alpha: 1}, 250);
 			fadeIn.onComplete.add(function () {
 				updateNumbers();
 				canMove = true;
@@ -90,7 +91,7 @@ window.gameLogic = {
 
 		function updateScore (num) {
 			score += (num * 2);
-			console.log('score', score);
+			scope.$emit('addScore', score);
 		}
 		
 		function updateNumbers () {

@@ -18,7 +18,7 @@
 		vm.highScore = 0;
 		vm.enterName = false;
 		vm.playerName = 'Player 1';
-		vm.lightTheme = true;
+		vm.lightTheme = true;	
 
 		vm.newGame = function () {
 			window.gameLogic.newGame();
