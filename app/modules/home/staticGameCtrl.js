@@ -11,6 +11,8 @@ window.gameLogic = {
 	    	downKey,
 	    	leftKey,
 	    	rightKey,
+	    	randomValue,
+	    	score = 0,
 	    	colors = {
 		        2:0xFFFDE7,
 		        4:0xFFF9C4,
@@ -70,10 +72,10 @@ window.gameLogic = {
 			tile.addChild(text);
 			tileSprites.add(tile);
 			var fadeIn = game.add.tween(tile);
-			fadeIn.to({alpha: 1}, 250);
+			fadeIn.to({alpha: 1}, 300);
 			fadeIn.onComplete.add(function () {
 				updateNumbers();
-				canMove=true;
+				canMove = true;
 			});
 			fadeIn.start();
 		}
@@ -84,6 +86,11 @@ window.gameLogic = {
 		
 		function toCol (n) {
 			return n % 4;	
+		}
+
+		function updateScore (num) {
+			score += (num * 2);
+			console.log('score', score);
 		}
 		
 		function updateNumbers () {
@@ -104,9 +111,10 @@ window.gameLogic = {
 					var col = toCol(item.pos);
 					if (col > 0) {
 						var remove = false;
-						for (var i = col-1; i >= 0; i--) {
+						for (var i = col - 1; i >= 0; i--) {
 							if (fieldArray[row * 4 + i] !== 0) {
 								if (fieldArray[row * 4 + i] === fieldArray[row * 4 + col]) {
+									updateScore(fieldArray[row*4+i]);
 									remove = true;
 									i--;                                             
 								}
@@ -158,7 +166,8 @@ window.gameLogic = {
 	                    var remove = false;
 						for (var i = row - 1; i >= 0; i--) {
 							if (fieldArray[i * 4 + col] !== 0) {
-								if(fieldArray[i * 4 + col] === fieldArray[row * 4 + col]) {
+								if (fieldArray[i * 4 + col] === fieldArray[row * 4 + col]) {
+									updateScore(fieldArray[i * 4 + col]);
 									remove = true;
 									i--;                                             
 								}
@@ -189,6 +198,7 @@ window.gameLogic = {
 							if (fieldArray[row * 4 + i] !== 0) {
 	                            if (fieldArray[row * 4 + i] === fieldArray[row * 4 + col]) {
 									remove = true;
+									updateScore(fieldArray[row * 4 + i]);
 									i++;                                             
 								}
 								break;
@@ -217,6 +227,7 @@ window.gameLogic = {
 						for (var i = row + 1; i <= 3; i++) {
 							if (fieldArray[i * 4 + col] !== 0) {
 								if (fieldArray[i * 4 + col] === fieldArray[row * 4 + col]) {
+									updateScore(fieldArray[i * 4 + col]);
 									remove = true;
 									i++;                                             
 								}
