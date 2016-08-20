@@ -9,22 +9,22 @@ window.createGame = function () {
     var leftKey;
     var rightKey;
     var colors = {
-        2:0xFFFFFF,
-        4:0xFFEEEE,
-        8:0xFFDDDD,
-        16:0xFFCCCC,
-        32:0xFFBBBB,
-        64:0xFFAAAA,
-        128:0xFF9999,
-        256:0xFF8888,
-        512:0xFF7777,
-        1024:0xFF6666,
-        2048:0xFF5555,
-        4096:0xFF4444,
-        8192:0xFF3333,
-        16384:0xFF2222,
-        32768:0xFF1111,
-        65536:0xFF0000
+        2:0xFFFDE7,
+        4:0xFFF9C4,
+        8:0xFFF59D,
+        16:0xFFF176,
+        32:0xFFAB91,
+        64:0xFF8A65,
+        128:0xFF7043,
+        256:0xFF5722,
+        512:0xE57373,
+        1024:0xEF5350,
+        2048:0xF44336,
+        4096:0xE53935,
+        8192:0xD32F2F,
+        16384:0xC62828,
+        32768:0xB71C1C,
+        65536:0xD50000
     };
     var canMove = false;
 
@@ -77,7 +77,6 @@ window.createGame = function () {
 	
 	function updateNumbers () {
 		tileSprites.forEach(function (item) {
-			console.log('item', item);
 			var value = fieldArray[item.pos];
 			item.getChildAt(0).text = value;
 			item.tint = colors[value];
