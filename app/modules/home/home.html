@@ -24,17 +24,18 @@
                 </div>
                 <p> New Game </p>
             </md-list-item>
-            <md-list-item>
-                <div class="inset">
-                    <ng-md-icon icon="grade"></ng-md-icon>
-                </div>
-                <p> High Score - {{vm.highScore}}</p>
-            </md-list-item>
             <md-list-item ng-click="vm.changeTheme()">
                 <div class="inset">
                     <ng-md-icon icon="color_lens"></ng-md-icon>
                 </div>
                 <p> Change Theme </p>
+            </md-list-item>
+            <md-list-item>
+                <div class="inset">
+                    <ng-md-icon icon="grade"></ng-md-icon>
+                </div>
+                <p> High Score</p>
+                <p>Player 1 - {{vm.highScore}}</p>
             </md-list-item>
         </md-list>
     </div>

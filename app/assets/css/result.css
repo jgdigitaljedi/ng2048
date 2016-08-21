@@ -2192,13 +2192,11 @@ ul {
 .white-text {
   color: #f1f1f1;
 }
-.box {
-  width: 40px;
-  height: 40px;
-  background-color: blue;
-}
-.box.transformed {
-  transform: translateX(300px);
+.title-area h1,
+.title-area h3,
+.title-area h4,
+.title-area span {
+  margin: 4px;
 }
 #game-container {
   display: -ms-flexbox;
