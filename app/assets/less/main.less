@@ -7,3 +7,35 @@
 	align-items: center;
 	margin-top: 10px;
 }
+
+.title-area {
+    h1, h3, h4, span {
+        margin: 4px;
+    }
+}
+
+.light-border {
+	border: 4px solid @flat-white;
+}
+
+.dark-border {
+	border: 4px solid @dark-lime;
+}
+
+.score-board, .score-board-light {
+	padding: 4px;
+	font-family: 'digital';
+	.BoxShadowHelper(1);
+	margin-bottom: 8px;
+	font-size: 1.2em;
+}
+
+.score-board {
+	background-color: @dark-lime;
+	color: white;
+}
+
+.score-board-light {
+	background-color: @flat-white;
+	color: #263238;
+}

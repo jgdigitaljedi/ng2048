@@ -2192,11 +2192,11 @@ ul {
 .white-text {
   color: #f1f1f1;
 }
-.title-area h1,
-.title-area h3,
-.title-area h4,
-.title-area span {
-  margin: 4px;
+@font-face {
+  font-family: 'digital';
+  src: url('../fonts/ds-digii-webfont.woff') format('woff'), url('../fonts/ds-digii-webfont.woff2') format('woff2'), url('../fonts/DS-DIGII.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 #game-container {
   display: -ms-flexbox;
@@ -2206,4 +2206,32 @@ ul {
   -ms-flex-align: center;
       align-items: center;
   margin-top: 10px;
+}
+.title-area h1,
+.title-area h3,
+.title-area h4,
+.title-area span {
+  margin: 4px;
+}
+.light-border {
+  border: 4px solid #f1f1f1;
+}
+.dark-border {
+  border: 4px solid #827717;
+}
+.score-board,
+.score-board-light {
+  padding: 4px;
+  font-family: 'digital';
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin-bottom: 8px;
+  font-size: 1.2em;
+}
+.score-board {
+  background-color: #827717;
+  color: white;
+}
+.score-board-light {
+  background-color: #f1f1f1;
+  color: #263238;
 }

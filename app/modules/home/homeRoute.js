@@ -1,4 +1,4 @@
-'use strict';
+'use strict()';
 
 	/**
 	* @ngdoc function
@@ -21,7 +21,7 @@ angular.module('ng2048')
 			})
 			.state('home.dashboard', {
 				url:'/dashboard',
-				templateUrl: 'app/modules/home/dashboard.html'
+				templateUrl: 'app/modules/home/gamecard.html'
 			});
 			
 	}]);

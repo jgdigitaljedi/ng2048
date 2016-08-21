@@ -34,8 +34,10 @@
                 <div class="inset">
                     <ng-md-icon icon="grade"></ng-md-icon>
                 </div>
-                <p> High Score</p>
-                <p>Player 1 - {{vm.highScore}}</p>
+                <div layout="column">
+                    <span> High Score</span>
+                    <span>Player 1 - {{vm.highScore}}</span>
+                </div>
             </md-list-item>
         </md-list>
     </div>

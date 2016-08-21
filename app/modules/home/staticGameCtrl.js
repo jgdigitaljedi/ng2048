@@ -62,7 +62,7 @@ window.gameLogic = {
 
 		function addTwo (){
 			while (fieldArray[randomValue] !== 0) {
-				var randomValue = Math.floor(Math.random() * 16);				
+				randomValue = Math.floor(Math.random() * 16);				
 			}
 			fieldArray[randomValue] = 2;
 			var tile = game.add.sprite(toCol(randomValue) * tileSize,toRow(randomValue) * tileSize, 'tile');
