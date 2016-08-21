@@ -28,7 +28,6 @@
 			    	downKey,
 			    	leftKey,
 			    	rightKey,
-			    	// randomValue,
 			    	score = 0,
 			    	colors = {
 				        2:0xFFFDE7,
@@ -265,14 +264,15 @@
 
 				var game = 
 					new Phaser.Game(tileSize * 4, tileSize * 4, Phaser.CANVAS, 'gameCanvas');
+				this.Game = game;
 				var startState = {preload: onPreload, create: onCreate};
 				game.state.add('MainGame', startState);
 				game.state.start('MainGame');
 				window.game = game;
 			},
-			newGame: function () {
-				window.game.destroy();
-				this.createGame();
+			newGame: function (scope) {
+				this.Game.destroy();
+				this.createGame(scope);
 			}
 		};
 	}

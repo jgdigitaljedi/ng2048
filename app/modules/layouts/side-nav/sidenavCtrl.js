@@ -12,7 +12,7 @@
 		.module('ng2048')
 		.controller('SidenavCtrl', SidenavCtrl);
 
-	function SidenavCtrl($mdSidenav, $state, $mdBottomSheet, $mdToast, MenuService, $scope, $rootScope) {
+	function SidenavCtrl ($mdSidenav, $state, $mdBottomSheet, $mdToast, MenuService, $scope, $rootScope, GameLogicService) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.highScore = 0;
@@ -21,7 +21,7 @@
 		vm.lightTheme = true;	
 
 		vm.newGame = function () {
-			window.gameLogic.newGame();
+			GameLogicService.newGame($scope);
 		};
 
 		vm.toggleSidenav = function (menuId) {

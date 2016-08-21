@@ -2235,3 +2235,6 @@ ul {
   background-color: #f1f1f1;
   color: #263238;
 }
+md-card {
+  margin: 0;
+}
