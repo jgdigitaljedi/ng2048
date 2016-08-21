@@ -24,7 +24,6 @@
 		vm.userScore = 0;
 
 		$scope.$on('addScore', function (e, score) {
-			console.log('addScoreCalled', score);
 			$scope.$apply(function () {
 				vm.userScore = score;
 			});
