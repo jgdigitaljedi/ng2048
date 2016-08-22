@@ -8,8 +8,8 @@ version 0.5.0
 
 Phangular2048! uses a number of open source projects to work properly:
 
-* [AngularJS] - HTML enhanced for web apps!
-* [node.js] - evented I/O for the backend
+* [AngularJS](https://github.com/angular/angular) - HTML enhanced for web apps!
+* [node.js](https://nodejs.org/en/) - evented I/O for the backend
 * [Phaser.js](https://github.com/photonstorm/phaser) - Phaser is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.
 * [Angular Material](https://github.com/angular/material) - Material design for Angular
 * [grunt](https://github.com/gruntjs/grunt) - Grunt: The JavaScript Task Runner
