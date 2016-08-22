@@ -2238,3 +2238,7 @@ ul {
 md-card {
   margin: 0;
 }
+.main-screen,
+.main-card {
+  min-height: calc(100vh - 64px);
+}

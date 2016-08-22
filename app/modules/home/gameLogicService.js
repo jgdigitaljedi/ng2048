@@ -119,35 +119,6 @@
 					});	
 				}
 				
-				function moveLeft () {
-			        if (canMove) {
-			            canMove = false;
-			            var moved = false;
-			            tileSprites.sort('x',Phaser.Group.SORT_ASCENDING);
-						tileSprites.forEach(function (item){
-							var row = toRow(item.pos);
-							var col = toCol(item.pos);
-							if (col > 0) {
-								var remove = false;
-								for (var i = col - 1; i >= 0; i--) {
-									if (fieldArray[row * 4 + i] !== 0) {
-										if (fieldArray[row * 4 + i] === fieldArray[row * 4 + col]) {
-											updateScore(fieldArray[row*4+i]);
-											remove = true;
-											i--;                                             
-										}
-										break;
-									}
-								}
-								if (col !== i + 1) {
-									moved = true;
-			                        moveTile(item, row * 4 + col, row * 4 + i + 1, remove);
-								}
-							}
-						});
-						endMove(moved);
-			        }
-				}
 				
 				function endMove (m) {
 					if (m) {
@@ -200,6 +171,36 @@
 						});
 						endMove(moved);
 			         }
+				}
+				
+				function moveLeft () {
+			        if (canMove) {
+			            canMove = false;
+			            var moved = false;
+			            tileSprites.sort('x',Phaser.Group.SORT_ASCENDING);
+						tileSprites.forEach(function (item){
+							var row = toRow(item.pos);
+							var col = toCol(item.pos);
+							if (col > 0) {
+								var remove = false;
+								for (var i = col - 1; i >= 0; i--) {
+									if (fieldArray[row * 4 + i] !== 0) {
+										if (fieldArray[row * 4 + i] === fieldArray[row * 4 + col]) {
+											updateScore(fieldArray[row*4+i]);
+											remove = true;
+											i--;                                             
+										}
+										break;
+									}
+								}
+								if (col !== i + 1) {
+									moved = true;
+			                        moveTile(item, row * 4 + col, row * 4 + i + 1, remove);
+								}
+							}
+						});
+						endMove(moved);
+			        }
 				}
 
 			    function moveRight () {

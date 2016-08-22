@@ -1,5 +1,5 @@
-<div flex layout-sm="column" layout-fill>
-    <md-card class="text-center">
+<div flex layout-sm="column" class="main-screen" layout-fill>
+    <md-card class="text-center main-card">
         <md-card-content>
             <div class="title-area">
                 <h1>{{ vm.title }}</h1>
@@ -7,7 +7,7 @@
                 <span ng-class="{'score-board': vm.default, 'score-board-light': !vm.default}">Score: {{vm.userScore}}</span>
             </div>
             <md-divider class="margin-top-20"></md-divider>
-            <div id="game-container">
+            <div id="game-container" layout-align="center center" flex>
                 <game-canvas style="margin-top: 10px;" ng-class="{'light-border': !vm.default, 'dark-border': vm.default}">
                     
                 </game-canvas>
