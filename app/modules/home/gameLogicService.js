@@ -126,12 +126,13 @@
 			        } else {
 			            canMove = true;
 					}
-					var currentEmpties = fieldArray.filter(function (item, index) {
-						return item === 0;
-					});
-					if (currentEmpties.length === 0) {
-						scope.$emit('gameOver');
-					}
+					// HAHA! Just figured out that this game isnt that simple. Gotta rethink this.
+					// var currentEmpties = fieldArray.filter(function (item, index) {
+					// 	return item === 0;
+					// });
+					// if (currentEmpties.length === 0) {
+					// 	scope.$emit('gameOver');
+					// }
 				}
 				
 				function moveTile (tile, from, to, remove) {
