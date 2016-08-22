@@ -126,6 +126,12 @@
 			        } else {
 			            canMove = true;
 					}
+					var currentEmpties = fieldArray.filter(function (item, index) {
+						return item === 0;
+					});
+					if (currentEmpties.length === 0) {
+						scope.$emit('gameOver');
+					}
 				}
 				
 				function moveTile (tile, from, to, remove) {
@@ -172,7 +178,7 @@
 						endMove(moved);
 			         }
 				}
-				
+
 				function moveLeft () {
 			        if (canMove) {
 			            canMove = false;
