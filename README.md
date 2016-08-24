@@ -37,6 +37,7 @@ $ node server.js
 ```
 ### Todos
 
+ - Just threw up backend. Gotta wire it in still. I never have free time it seems.
  - Write Tests
  - Add Code Comments
  - display highest scores
