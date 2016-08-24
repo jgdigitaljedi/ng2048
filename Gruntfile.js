@@ -261,6 +261,7 @@ module.exports = function (grunt) {
 		"less",
 		"exec",
 		"concat",
+		"ngAnnotate",
 		"uglify",
 		"ngtemplates",
 		"cssmin",
