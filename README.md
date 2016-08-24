@@ -13,6 +13,9 @@ Phangular2048! uses a number of open source projects to work properly:
 * [Phaser.js](https://github.com/photonstorm/phaser) - Phaser is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.
 * [Angular Material](https://github.com/angular/material) - Material design for Angular
 * [grunt](https://github.com/gruntjs/grunt) - Grunt: The JavaScript Task Runner
+* [Express](https://github.com/expressjs/express) - Express.js: the fast, unopinionated, minimalist web framework for node
+* [Mongoose](https://github.com/Automattic/mongoose) - MongoDB object modeling designed to work in an asynchronous environment.
+* [MongoDB](https://www.mongodb.com/) - Building on the Best of Relational with the Innovations of NoSQL
 
 
 ### Installation
@@ -26,16 +29,19 @@ $ npm install
 ```sh
 $ grunt dev
 ```
+
+### To Run Built Version From Node
+```sh
+$ grunt build
+$ node server.js
+```
 ### Todos
 
  - Write Tests
  - Add Code Comments
- - add MongoDB to store highest scores
  - display highest scores
  - add weather to top navbar (because it is a thing I do to a lot of projects)
  - style it up a bit more
- - get production build running (haven't tried it yet)
- - write Node script to host it
 
 License
 ----
