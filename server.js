@@ -14,15 +14,28 @@ mongoose.connect('mongodb://localhost/2048');
 var db = mongoose.connection;
 db.on('error', console.error);
 
-var Scores = require('./schemas/scores.js');
+var HighScores = require('./schemas/scores.js');
 
 // read and write db
-app.get('/gethighscore', function () {
-
+app.get('/gethighscore', function (req, res) {
+	HighScores.find({}, function (item) {
+		res.send(item);
+	});
 });
 
-app.post('/newhighscore', function (score) {
+app.post('/newhighscore', function (req, res) {
+	// some logic here for getting requesteed object...then...
+	HighScores.remove(function (err, count) { // only 1 high score at a time for now
+		var newScore = HighScores({
+			name: score.name,
+			dateTime: score.date,
+			score: score.value
+		});
 
+		newScore.save(function (err) {
+			if (err) throw err;
+		});
+	});
 });
 
 
