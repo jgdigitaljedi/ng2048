@@ -6,7 +6,8 @@ var hsSchema = new Schema({
 	id: ObjectId,
 	name: String,
 	dateTime: Date,
-	score: Number
+	score: Number,
+	which: String
 });
 
 var Scores = mongoose.model('Scores', hsSchema);

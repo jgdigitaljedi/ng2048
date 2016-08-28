@@ -12,16 +12,29 @@
 		.module('ng2048')
 		.controller('SidenavCtrl', SidenavCtrl);
 
-	function SidenavCtrl ($mdSidenav, $state, $mdBottomSheet, $mdToast, MenuService, $scope, $rootScope, GameLogicService) {
+	function SidenavCtrl ($mdSidenav, $state, $mdBottomSheet, $mdToast, MenuService, $scope, $rootScope, GameLogicService, $http) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.highScore = 0;
 		vm.enterName = false;
 		vm.playerName = 'Player 1';
-		vm.lightTheme = true;	
+		vm.lightTheme = true;
+
+		// $http.get('/gethighscore')
+		// 	.success(function (data, status, headers, config) {
+		// 		console.log('success data hs', data);
+		// 	})
+		// 	.error(function(data, status, headers, config) {
+		// 		console.log('error data hs', data);
+		// 	});
 
 		vm.newGame = function () {
 			GameLogicService.newGame($scope);
+		};
+
+		vm.enteringName = function () {
+			if (vm.enterName) $scope.$parent.vm.name = vm.playerName;
+			vm.enterName = !vm.enterName;
 		};
 
 		vm.toggleSidenav = function (menuId) {
