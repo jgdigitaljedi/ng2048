@@ -266,7 +266,7 @@ module.exports = function (grunt) {
 		"ngtemplates",
 		"cssmin",
 		"injector:production",
-		"concurrent",
+		// "concurrent",
 		"clean"
 	]);
 

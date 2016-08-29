@@ -16,7 +16,9 @@
                 </div>
                 <span ng-switch="vm.enterName">
                     <p ng-switch-when="false"> {{vm.playerName}} </p>
-                    <input placeholder="{{vm.playerName}}" ng-switch-when="true" ng-model="vm.playerName" />
+                    <input type="text" placeholder="{{vm.playerName}}" ng-switch-when="true" ng-model="vm.playerName"
+                        ng-keydown="vm.checkForEnter($event)" />
+                </span>
             </md-list-item>
             <md-list-item ng-click="vm.newGame()">
                 <div class="inset">
@@ -30,12 +32,13 @@
                 </div>
                 <p> Change Theme </p>
             </md-list-item>
+            <md-divider></md-divider>
             <md-list-item>
                 <div class="inset">
                     <ng-md-icon icon="grade"></ng-md-icon>
                 </div>
                 <div layout="column">
-                    <span> High Score</span>
+                    <span style="font-weight: bold !important;"> High Score</span>
                     <span>{{vm.navHighScore.score}}</span>
                     <span>{{vm.navHighScore.name}}</span>
                     <span>{{vm.navHighScore.dateTime}}</span>

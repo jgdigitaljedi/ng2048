@@ -21,16 +21,8 @@
 		vm.lightTheme = true;
 
 		$scope.$on('hs', function (e, data) {
-			vm.navHighScore = data;			
+			vm.navHighScore = data;
 		});
-
-		// $http.get('/gethighscore')
-		// 	.success(function (data, status, headers, config) {
-		// 		console.log('success data hs', data);
-		// 	})
-		// 	.error(function(data, status, headers, config) {
-		// 		console.log('error data hs', data);
-		// 	});
 
 		vm.newGame = function () {
 			GameLogicService.newGame($scope);
@@ -39,6 +31,11 @@
 		vm.enteringName = function () {
 			if (vm.enterName) $scope.$parent.vm.name = vm.playerName;
 			vm.enterName = !vm.enterName;
+		};
+
+		vm.checkForEnter = function (key) {
+			console.log('key', key);
+			if (key.which === 13) vm.enteringName();
 		};
 
 		vm.toggleSidenav = function (menuId) {

@@ -137,9 +137,9 @@ angular.module('ng2048')
 		.module('ng2048')
 		.controller('HomeCtrl', Home);
 
-	Home.$inject = ['$scope', '$mdDialog'];
+	Home.$inject = ['$scope', '$mdDialog', '$http'];
 
-	function Home ($scope, $mdDialog) {
+	function Home ($scope, $mdDialog, $http) {
 		/*jshint validthis: true */
 		var vm = this,
 			gameOverDialog;
@@ -147,11 +147,33 @@ angular.module('ng2048')
 		vm.version = 'v0.5.0';
 		vm.default = true;
 		vm.userScore = 0;
+		vm.name = 'Player 1';
+
+		$http.get('/gethighscore')
+			.success(function (data, status, headers, config) {
+				console.log('success data hs', data);
+				vm.highScore = data;
+				$scope.$broadcast('hs', data);
+			})
+			.error(function(data, status, headers, config) {
+				console.log('error getting hs', data);
+			});
 
 		$scope.$on('addScore', function (e, score) {
 			$scope.$apply(function () {
 				vm.userScore = score;
 			});
+			var params = {name: vm.name, score: score};
+			if (score > vm.highScore.score) {
+				$http.post('/updatescore', JSON.stringify(params))
+					.success(function (data, status, headers, config) {
+						console.log('success data', data);
+						$scope.$broadcast('hs', data.score);
+					})
+					.error(function(data, status, headers, config) {
+						console.log('error data', data);
+					});				
+			}
 		});
 
 		$scope.$on('gameOver', function (item, index) {
@@ -212,21 +234,39 @@ angular.module('ng2048')
 	* # SidenavCtrl
 	* Controller of the app
 	*/
-	SidenavCtrl.$inject = ['$mdSidenav', '$state', '$mdBottomSheet', '$mdToast', 'MenuService', '$scope', '$rootScope', 'GameLogicService'];
+	SidenavCtrl.$inject = ['$mdSidenav', '$state', '$mdBottomSheet', '$mdToast', 'MenuService', '$scope', '$rootScope', 'GameLogicService', '$http'];
 	angular
 		.module('ng2048')
 		.controller('SidenavCtrl', SidenavCtrl);
 
-	function SidenavCtrl ($mdSidenav, $state, $mdBottomSheet, $mdToast, MenuService, $scope, $rootScope, GameLogicService) {
+	function SidenavCtrl ($mdSidenav, $state, $mdBottomSheet, $mdToast, MenuService, $scope, $rootScope, GameLogicService, $http) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.highScore = 0;
 		vm.enterName = false;
 		vm.playerName = 'Player 1';
-		vm.lightTheme = true;	
+		vm.lightTheme = true;
+
+		$scope.$on('hs', function (e, data) {
+			vm.navHighScore = data;
+			vm.navHighScore.dateTime = moment(vm.navHighScore.dateTime).format('MM/DD/YYYY HH:mm');	
+		});
+
+		// $http.get('/gethighscore')
+		// 	.success(function (data, status, headers, config) {
+		// 		console.log('success data hs', data);
+		// 	})
+		// 	.error(function(data, status, headers, config) {
+		// 		console.log('error data hs', data);
+		// 	});
 
 		vm.newGame = function () {
 			GameLogicService.newGame($scope);
+		};
+
+		vm.enteringName = function () {
+			if (vm.enterName) $scope.$parent.vm.name = vm.playerName;
+			vm.enterName = !vm.enterName;
 		};
 
 		vm.toggleSidenav = function (menuId) {

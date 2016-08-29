@@ -36,7 +36,7 @@ angular.module('ng2048').run(['$templateCache', function($templateCache) {
     "        </md-toolbar>\n" +
     "        <md-list ng-class=\"{ 'white-text': !vm.lightTheme }\">\n" +
     "            <md-list-item>\n" +
-    "                <div class=\"inset\" ng-click=\"vm.enterName = !vm.enterName\">\n" +
+    "                <div class=\"inset\" ng-click=\"vm.enteringName()\">\n" +
     "                    <ng-md-icon icon=\"face\"></ng-md-icon>\n" +
     "                </div>\n" +
     "                <span ng-switch=\"vm.enterName\">\n" +
@@ -55,14 +55,17 @@ angular.module('ng2048').run(['$templateCache', function($templateCache) {
     "                </div>\n" +
     "                <p> Change Theme </p>\n" +
     "            </md-list-item>\n" +
-    "            <!-- <md-list-item>\n" +
+    "            <md-divider></md-divider>\n" +
+    "            <md-list-item>\n" +
     "                <div class=\"inset\">\n" +
     "                    <ng-md-icon icon=\"grade\"></ng-md-icon>\n" +
     "                </div>\n" +
     "                <div layout=\"column\">\n" +
-    "                    <span> High Score</span>\n" +
-    "                    <span>Player 1 - {{vm.highScore}}</span>\n" +
-    "                </div> -->\n" +
+    "                    <span style=\"font-weight: bold !important;\"> High Score</span>\n" +
+    "                    <span>{{vm.navHighScore.score}}</span>\n" +
+    "                    <span>{{vm.navHighScore.name}}</span>\n" +
+    "                    <span>{{vm.navHighScore.dateTime}}</span>\n" +
+    "                </div>\n" +
     "            </md-list-item>\n" +
     "        </md-list>\n" +
     "    </div>\n" +

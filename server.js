@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var moment = require('moment');
 
 var initialHighScore = {};
-var dateFormat = 'MM/DD/YYYY hh:mm a';
+var dateFormat = 'MM/DD/YYYY h:mm a';
 
 app.use(bodyParser.json());
 
@@ -27,7 +27,7 @@ db.once('open', function() {
 	HighScores.findOne({which: 'highest'}, function (err, item) {
 		if (!item || err) {
 			console.log('setting initial high score value');
-			var newScore = {score: 0, dateTime: new Date(), name: 'Player 1', which: 'highest'};
+			var newScore = {score: 0, dateTime: moment().format(dateFormat), name: 'Player 1', which: 'highest'};
 			var initHs = new HighScores(newScore);
 			initHs.save(function (error) {
 				if (error) throw err;
@@ -39,11 +39,8 @@ db.once('open', function() {
 
 // read and write db
 app.get('/gethighscore', function (req, res) {
-	// HighScores.find(function (err, scores) { //for debugging
-	// 	console.log('scores: ', scores);
-	// });
 	HighScores.findOne( {which: 'highest'}, function (err, item) {
-		item.dateTime = moment(item.dateTime).format(dateFormat);
+		console.log(item.dateTime);
 		res.send(item);
 	});
 });
@@ -51,7 +48,7 @@ app.get('/gethighscore', function (req, res) {
 app.post('/updatescore', function (req, res) {
 	var newHigh = false;
 	HighScores.findOneAndUpdate({which: 'highest'},
-	{$set: {name: req.body.name, dateTime: new Date(), score: req.body.score}}, {new: true}, function (error, item) {
+	{$set: {name: req.body.name, dateTime: moment().format(dateFormat), score: req.body.score}}, {new: true}, function (error, item) {
 		res.send({error: false, score: item});
 	});
 });

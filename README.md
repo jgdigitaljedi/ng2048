@@ -37,11 +37,9 @@ $ node server.js
 ```
 ### Todos
 
- - Just threw up backend. Gotta wire it in still. I never have free time it seems.
  - Write Tests
  - Add Code Comments
- - display highest scores
- - add weather to top navbar (because it is a thing I do to a lot of projects)
+ - add weather to top navbar (because I like weather)
  - style it up a bit more
 
 License

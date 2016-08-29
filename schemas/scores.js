@@ -5,7 +5,7 @@ var ObjectId = Schema.ObjectId; // I don't know, maybe I add some stuff later an
 var hsSchema = new Schema({
 	id: ObjectId,
 	name: String,
-	dateTime: Date,
+	dateTime: String,
 	score: Number,
 	which: String
 });
