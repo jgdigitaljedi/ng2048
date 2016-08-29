@@ -29,6 +29,7 @@
 			.success(function (data, status, headers, config) {
 				console.log('success data hs', data);
 				vm.highScore = data;
+				$scope.$broadcast('hs', data);
 			})
 			.error(function(data, status, headers, config) {
 				console.log('error getting hs', data);
@@ -43,6 +44,7 @@
 				$http.post('/updatescore', JSON.stringify(params))
 					.success(function (data, status, headers, config) {
 						console.log('success data', data);
+						$scope.$broadcast('hs', data.score);
 					})
 					.error(function(data, status, headers, config) {
 						console.log('error data', data);

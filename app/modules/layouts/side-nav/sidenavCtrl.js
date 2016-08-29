@@ -20,6 +20,10 @@
 		vm.playerName = 'Player 1';
 		vm.lightTheme = true;
 
+		$scope.$on('hs', function (e, data) {
+			vm.navHighScore = data;			
+		});
+
 		// $http.get('/gethighscore')
 		// 	.success(function (data, status, headers, config) {
 		// 		console.log('success data hs', data);

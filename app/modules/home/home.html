@@ -30,14 +30,16 @@
                 </div>
                 <p> Change Theme </p>
             </md-list-item>
-            <!-- <md-list-item>
+            <md-list-item>
                 <div class="inset">
                     <ng-md-icon icon="grade"></ng-md-icon>
                 </div>
                 <div layout="column">
                     <span> High Score</span>
-                    <span>Player 1 - {{vm.highScore}}</span>
-                </div> -->
+                    <span>{{vm.navHighScore.score}}</span>
+                    <span>{{vm.navHighScore.name}}</span>
+                    <span>{{vm.navHighScore.dateTime}}</span>
+                </div>
             </md-list-item>
         </md-list>
     </div>

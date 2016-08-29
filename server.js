@@ -26,26 +26,14 @@ db.once('open', function() {
 	console.log('db connected');
 	HighScores.findOne({which: 'highest'}, function (err, item) {
 		if (!item || err) {
+			console.log('setting initial high score value');
 			var newScore = {score: 0, dateTime: new Date(), name: 'Player 1', which: 'highest'};
 			var initHs = new HighScores(newScore);
 			initHs.save(function (error) {
 				if (error) throw err;
 			});
-			initialHighScore = newScore;
-		} else {
-			initialHighScore = item;
 		}
 	});
-
-	HighScores.findOne({which: 'currentGame'}, function (err, item) {
-		if (!item || err) {
-			item = {score: 0, dateTime: new Date(), name: 'Player 1', which: 'currentGame'};
-			var initCgs = new HighScores(item);
-			initCgs.save(function (error) {
-				if (error) throw err;
-			});
-		}
-	});	
 });
 
 
@@ -55,36 +43,17 @@ app.get('/gethighscore', function (req, res) {
 	// 	console.log('scores: ', scores);
 	// });
 	HighScores.findOne( {which: 'highest'}, function (err, item) {
-		console.log('the item', item);
 		item.dateTime = moment(item.dateTime).format(dateFormat);
-		initialHighScore = item.score;
 		res.send(item);
 	});
 });
 
 app.post('/updatescore', function (req, res) {
-	console.log(req.body.name);
 	var newHigh = false;
-	HighScores.findOne({which: 'currentGame'}, function (error, item) {
-		item.score = req.body.score;
-		item.dateTime = new Date();
-		item.name = req.body.name;
-		item.update(function (err) {
-			if (err) throw err;
-		});
+	HighScores.findOneAndUpdate({which: 'highest'},
+	{$set: {name: req.body.name, dateTime: new Date(), score: req.body.score}}, {new: true}, function (error, item) {
+		res.send({error: false, score: item});
 	});
-	if (initialHighScore <= req.body.score) {
-		HighScores.findOne( {which: 'highest'}, function (error, item) {
-			newHigh = true;
-			item.score = req.body.score;
-			item.dateTime = new Date();
-			item.name = req.body.name;
-			item.update(function (err) {
-				if (err) throw err;
-			});
-		});
-	}
-	res.send({error: false, newHigh: newHigh});
 });
 
 
