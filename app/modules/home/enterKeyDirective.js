@@ -10,7 +10,6 @@ angular.module('ng2048').directive('dlEnterKey', function() {
                 scope.$apply(function() {
                     scope.$eval(attrs.dlEnterKey);
                 });
-
                 event.preventDefault();
             }
         });

@@ -128,6 +128,13 @@ module.exports = function (grunt) {
 		    		spawn: false,
 		    		livereload: true
 		    	}
+		    },
+		    express: {
+		    	files: ['**/*.js'],
+		    	tasks: ['express:dev'],
+		    	options: {
+		    		spawn: false
+		    	}
 		    }
 		},
 
@@ -243,9 +250,15 @@ module.exports = function (grunt) {
 					}
 				]
 			}
+		},
+
+		express: {
+			dev: {
+				options: {
+					script: 'server.js'					
+				}
+			}
 		}
-
-
 	});
 
 	require('time-grunt')(grunt);
@@ -259,7 +272,7 @@ module.exports = function (grunt) {
 		"jshint",
 		"copy",
 		"less",
-		// "exec",
+		"exec",
 		"concat",
 		"ngAnnotate",
 		"uglify",
@@ -271,6 +284,6 @@ module.exports = function (grunt) {
 	]);
 
 	// Development task(s).
-	grunt.registerTask('dev', ['jshint', 'injector:dev', 'copy', 'less', 'concurrent']);
+	grunt.registerTask('dev', ['jshint', 'injector:dev', 'copy', 'less', 'express:dev', 'watch']);
 
 };
