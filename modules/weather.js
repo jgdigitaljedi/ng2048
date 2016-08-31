@@ -1,3 +1,7 @@
+var fs = require('fs');
+var moment = require('moment');
+var http = require('http');
+
 exports.conditions = function(req, res) {
     fs.access('cache.json', fs.F_OK, function (err) {
         if (err) {
@@ -26,12 +30,11 @@ exports.conditions = function(req, res) {
             } catch (e) {
                 readError = true;
             }
-
             var now = moment().unix(),
                 conTimestamp = readError ? false : parseInt(jsonObj.conditions.timestamp),
                 cachedConditions = readError ? false : jsonObj.conditions.data;
             if (!conTimestamp || !cachedConditions || now - conTimestamp >= 900) { // if timestamp doesn't exist or timestamp from cache is more than 15 minutes old
-                http.get('http://api.wunderground.com/api/'+ process.env.WEATHER_KEY + '/geolookup/conditions/q/' + req.params.loc + '.json')
+                http.get('http://api.wunderground.com/api/'+ process.env.WEATHER_KEY + '/geolookup/conditions/q/' + req.params.location + '.json')
                     .on('response', function (response) {
                         var statusCode = response.statusCode;
                         var body = '',

@@ -13,7 +13,7 @@ var dateFormat = 'MM/DD/YYYY h:mm a';
 app.use(bodyParser.json());
 
 // weather and possibly future auxillary calls
-app.get('/getconditions', function (req, res) {
+app.get('/getconditions/:location', function (req, res) {
 	Weather.conditions(req, res);
 });
 
