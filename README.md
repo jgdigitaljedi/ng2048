@@ -39,7 +39,6 @@ $ node server.js
 
  - Write Tests
  - Add Code Comments
- - add weather to top navbar (because I like weather)
  - style it up a bit more
 
 License
