@@ -5,11 +5,17 @@ var app      = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var moment = require('moment');
+var Weather = require('./modules/weather.js');
 
 var initialHighScore = {};
 var dateFormat = 'MM/DD/YYYY h:mm a';
 
 app.use(bodyParser.json());
+
+// weather and possibly future auxillary calls
+app.get('/getconditions', function (req, res) {
+	Weather.conditions(req, res);
+});
 
 // serve files because I didn't use a bloated generator and don't have time to do this a different way
 app.use('/app', express.static(path.join(__dirname, '/app')));
