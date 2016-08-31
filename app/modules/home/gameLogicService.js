@@ -21,8 +21,14 @@
 				this.game(scope);
 			},
 			game: function (scope) {
+				var previousBoard = false;
+				if (sessionStorage.getItem('2048board')) {
+					previousBoard = sessionStorage.getItem('2048board').split(',').map(function (item) {
+						return parseInt(item);
+					});
+				}
 				var tileSize = 100,
-					fieldArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+					fieldArray = previousBoard ? previousBoard : new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
 					tileSprites,
 			    	upKey,
 			    	downKey,
@@ -72,8 +78,36 @@
 					rightKey.onDown.add(moveRight, this);
 					cursors.right.onDown.add(moveRight, this);
 					tileSprites = game.add.group();
-					addTwo();
-					addTwo();
+					if (!previousBoard) {
+						addTwo();
+						addTwo();						
+					} else {
+						createOldLayout();
+					}
+				}
+				function addBackTiles (column, row, value, index) {
+					var tile = game.add.sprite(toCol(index) * tileSize, toRow(index) * tileSize, 'tile');
+					tile.pos = index;
+					tile.alpha = 0;
+					var text = game.add.text(tileSize / 2,tileSize / 2, value.toString(), {font:'bold 16px Arial',align:'center'});
+					text.anchor.set(0.5);
+					tile.addChild(text);
+					tileSprites.add(tile);
+					var fadeIn = game.add.tween(tile);
+					fadeIn.to({alpha: 1}, 250);
+					fadeIn.onComplete.add(function () {
+						updateNumbers();
+						canMove = true;
+					});
+					fadeIn.start();
+				}
+
+				function createOldLayout () {
+					previousBoard.forEach(function (item, index) {
+						var row = Math.floor((index / 4));
+						var column = (index % 4);
+						if (item !== 0) addBackTiles(column, row, item, index);
+					});
 				}
 
 				function addTwo () {
@@ -107,8 +141,8 @@
 				}
 
 				function updateScore (num) {
-					score += (num * 2);
-					scope.$emit('addScore', score);
+					// score += (num * 2);
+					scope.$emit('addScore', num * 2);
 				}
 				
 				function updateNumbers () {
@@ -126,6 +160,7 @@
 			        } else {
 			            canMove = true;
 					}
+					sessionStorage.setItem('2048board', fieldArray);
 					// HAHA! Just figured out that this game isnt that simple. Gotta rethink this.
 					// var currentEmpties = fieldArray.filter(function (item, index) {
 					// 	return item === 0;

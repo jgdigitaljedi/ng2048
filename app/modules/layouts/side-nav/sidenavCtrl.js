@@ -25,6 +25,8 @@
 		});
 
 		vm.newGame = function () {
+			sessionStorage.clear();
+			$scope.$parent.vm.userScore = 0;
 			GameLogicService.newGame($scope);
 		};
 

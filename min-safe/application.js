@@ -146,7 +146,7 @@ angular.module('ng2048')
 		vm.title = 'Phangular 2048!';
 		vm.version = 'v0.5.0';
 		vm.default = true;
-		vm.userScore = 0;
+		vm.userScore = sessionStorage.getItem('2048score') ? parseInt(sessionStorage.getItem('2048score')) : 0;
 		vm.name = 'Player 1';
 
 		$http.get('/gethighscore')
@@ -161,10 +161,10 @@ angular.module('ng2048')
 
 		$scope.$on('addScore', function (e, score) {
 			$scope.$apply(function () {
-				vm.userScore = score;
+				vm.userScore += score;
 			});
-			var params = {name: vm.name, score: score};
-			if (score > vm.highScore.score) {
+			var params = {name: vm.name, score: vm.userScore};
+			if (vm.userScore > vm.highScore.score) {
 				$http.post('/updatescore', JSON.stringify(params))
 					.success(function (data, status, headers, config) {
 						console.log('success data', data);
@@ -174,6 +174,7 @@ angular.module('ng2048')
 						console.log('error data', data);
 					});				
 			}
+			sessionStorage.setItem('2048score', vm.userScore);
 		});
 
 		$scope.$on('gameOver', function (item, index) {
@@ -249,24 +250,22 @@ angular.module('ng2048')
 
 		$scope.$on('hs', function (e, data) {
 			vm.navHighScore = data;
-			vm.navHighScore.dateTime = moment(vm.navHighScore.dateTime).format('MM/DD/YYYY HH:mm');	
 		});
 
-		// $http.get('/gethighscore')
-		// 	.success(function (data, status, headers, config) {
-		// 		console.log('success data hs', data);
-		// 	})
-		// 	.error(function(data, status, headers, config) {
-		// 		console.log('error data hs', data);
-		// 	});
-
 		vm.newGame = function () {
+			sessionStorage.clear();
+			$scope.$parent.vm.userScore = 0;
 			GameLogicService.newGame($scope);
 		};
 
 		vm.enteringName = function () {
 			if (vm.enterName) $scope.$parent.vm.name = vm.playerName;
 			vm.enterName = !vm.enterName;
+		};
+
+		vm.checkForEnter = function (key) {
+			console.log('key', key);
+			if (key.which === 13) vm.enteringName();
 		};
 
 		vm.toggleSidenav = function (menuId) {
@@ -312,8 +311,14 @@ angular.module('ng2048')
 				this.game(scope);
 			},
 			game: function (scope) {
+				var previousBoard = false;
+				if (sessionStorage.getItem('2048board')) {
+					previousBoard = sessionStorage.getItem('2048board').split(',').map(function (item) {
+						return parseInt(item);
+					});
+				}
 				var tileSize = 100,
-					fieldArray = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
+					fieldArray = previousBoard ? previousBoard : new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
 					tileSprites,
 			    	upKey,
 			    	downKey,
@@ -363,8 +368,36 @@ angular.module('ng2048')
 					rightKey.onDown.add(moveRight, this);
 					cursors.right.onDown.add(moveRight, this);
 					tileSprites = game.add.group();
-					addTwo();
-					addTwo();
+					if (!previousBoard) {
+						addTwo();
+						addTwo();						
+					} else {
+						createOldLayout();
+					}
+				}
+				function addBackTiles (column, row, value, index) {
+					var tile = game.add.sprite(toCol(index) * tileSize, toRow(index) * tileSize, 'tile');
+					tile.pos = index;
+					tile.alpha = 0;
+					var text = game.add.text(tileSize / 2,tileSize / 2, value.toString(), {font:'bold 16px Arial',align:'center'});
+					text.anchor.set(0.5);
+					tile.addChild(text);
+					tileSprites.add(tile);
+					var fadeIn = game.add.tween(tile);
+					fadeIn.to({alpha: 1}, 250);
+					fadeIn.onComplete.add(function () {
+						updateNumbers();
+						canMove = true;
+					});
+					fadeIn.start();
+				}
+
+				function createOldLayout () {
+					previousBoard.forEach(function (item, index) {
+						var row = Math.floor((index / 4));
+						var column = (index % 4);
+						if (item !== 0) addBackTiles(column, row, item, index);
+					});
 				}
 
 				function addTwo () {
@@ -398,8 +431,8 @@ angular.module('ng2048')
 				}
 
 				function updateScore (num) {
-					score += (num * 2);
-					scope.$emit('addScore', score);
+					// score += (num * 2);
+					scope.$emit('addScore', num * 2);
 				}
 				
 				function updateNumbers () {
@@ -417,6 +450,7 @@ angular.module('ng2048')
 			        } else {
 			            canMove = true;
 					}
+					sessionStorage.setItem('2048board', fieldArray);
 					// HAHA! Just figured out that this game isnt that simple. Gotta rethink this.
 					// var currentEmpties = fieldArray.filter(function (item, index) {
 					// 	return item === 0;
@@ -614,6 +648,24 @@ angular.module('ng2048')
 
 })();
 
+angular.module('ng2048').directive('dlEnterKey', function() {
+    return function(scope, element, attrs) {
+
+        element.bind("keydown keypress", function(event) {
+            var keyCode = event.which || event.keyCode;
+
+            // If enter key is pressed
+            if (keyCode === 13) {
+                console.log('enter pressed');
+                scope.$apply(function() {
+                    scope.$eval(attrs.dlEnterKey);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
 angular.module('ng2048')
     .directive('gameCanvas', ['GameLogicService',
         function (Game) {

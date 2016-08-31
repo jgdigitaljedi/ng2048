@@ -22,7 +22,7 @@
 		vm.title = 'Phangular 2048!';
 		vm.version = 'v0.5.0';
 		vm.default = true;
-		vm.userScore = 0;
+		vm.userScore = sessionStorage.getItem('2048score') ? parseInt(sessionStorage.getItem('2048score')) : 0;
 		vm.name = 'Player 1';
 
 		$http.get('/gethighscore')
@@ -37,10 +37,10 @@
 
 		$scope.$on('addScore', function (e, score) {
 			$scope.$apply(function () {
-				vm.userScore = score;
+				vm.userScore += score;
 			});
-			var params = {name: vm.name, score: score};
-			if (score > vm.highScore.score) {
+			var params = {name: vm.name, score: vm.userScore};
+			if (vm.userScore > vm.highScore.score) {
 				$http.post('/updatescore', JSON.stringify(params))
 					.success(function (data, status, headers, config) {
 						console.log('success data', data);
@@ -50,6 +50,7 @@
 						console.log('error data', data);
 					});				
 			}
+			sessionStorage.setItem('2048score', vm.userScore);
 		});
 
 		$scope.$on('gameOver', function (item, index) {

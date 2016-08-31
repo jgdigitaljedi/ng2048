@@ -259,7 +259,7 @@ module.exports = function (grunt) {
 		"jshint",
 		"copy",
 		"less",
-		"exec",
+		// "exec",
 		"concat",
 		"ngAnnotate",
 		"uglify",

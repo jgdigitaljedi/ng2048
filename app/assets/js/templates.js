@@ -41,7 +41,9 @@ angular.module('ng2048').run(['$templateCache', function($templateCache) {
     "                </div>\n" +
     "                <span ng-switch=\"vm.enterName\">\n" +
     "                    <p ng-switch-when=\"false\"> {{vm.playerName}} </p>\n" +
-    "                    <input placeholder=\"{{vm.playerName}}\" ng-switch-when=\"true\" ng-model=\"vm.playerName\" />\n" +
+    "                    <input type=\"text\" placeholder=\"{{vm.playerName}}\" ng-switch-when=\"true\" ng-model=\"vm.playerName\"\n" +
+    "                        ng-keydown=\"vm.checkForEnter($event)\" />\n" +
+    "                </span>\n" +
     "            </md-list-item>\n" +
     "            <md-list-item ng-click=\"vm.newGame()\">\n" +
     "                <div class=\"inset\">\n" +
