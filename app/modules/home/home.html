@@ -55,6 +55,10 @@
                 <ng-md-icon icon="menu"></ng-md-icon>
             </md-button>
             <!-- <h3>ng2048</h3> -->
+            <div flex layout-align="end center" layout="row">
+                <img class="nav-weather-icon" ng-src="{{layout.geoIcon}}" />
+                <div class="nav-weather">{{layout.geoTemp}}°F </div>
+            </div>
             <span flex></span>
         </div>
     </md-toolbar>

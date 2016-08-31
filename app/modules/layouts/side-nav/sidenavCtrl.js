@@ -19,15 +19,7 @@
 		vm.enterName = false;
 		vm.playerName = 'Player 1';
 		vm.lightTheme = true;
-		var location = '30.314574,-97.756780'; // for dev until I write geoloaction stuff
-
-		$http.get('/getconditions/' + location)
-			.success(function(data, status, headers, config) {
-				console.log('response', data);				
-			}).error(function(data, status, headers, config) {
-				console.log('error', data);
-			});
-
+		
 		$scope.$on('hs', function (e, data) {
 			vm.navHighScore = data;
 		});
